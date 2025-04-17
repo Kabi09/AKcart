@@ -232,6 +232,7 @@ exports.returnOrder = catchAsyncError(async (req, res, next) => {
 
     order.orderStatus = 'Returned';
     order.returnedAt = Date.now();
+    order.uniquecode = null
 
     // 🔁 Remove user's review from each product in this order
     for (const item of order.orderItems) {
@@ -278,7 +279,7 @@ We'll process your return shortly.
 
     await sendEmail({
         email: order.user.email,
-        subject: 'Return Request Received',
+        subject: 'Your Return Request Has Been Received',
         message
     });
 
